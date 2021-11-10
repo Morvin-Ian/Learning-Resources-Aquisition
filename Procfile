@@ -1,1 +1,1 @@
-web: gunicorn Mpesa.wsgi
+web: gunicorn Mpesa.wsgi --log-file -
