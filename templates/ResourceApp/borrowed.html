@@ -1,0 +1,30 @@
+<title>Borrowed Resources</title>
+
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Borrowed Resources</h1>
+{% if messages %}
+    {% for message in messages%}
+
+        <div class="alert alert-{{message.tags}}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% for resource in borrower.borrowed_resource_set.all %}
+
+    <ul>
+        <li><a href="#">{{resource.borrowed}} </a></li>
+        <li>Date Borrowed: {{resource.recorded_borrowing_date }} </li>
+        <li>Date to be Returned: {{resource.recorded_returning_date }} </li>
+        
+    </ul>
+
+{%endfor%}
+
+
+
+{% endblock %}
+

@@ -1,0 +1,49 @@
+
+{% extends 'base.html'%}
+<title>Resources Page</title>
+
+{% block content %}
+{% load crispy_forms_tags %}
+<style>
+    p{
+      
+        font-size: large;
+        font-weight:bolder ;
+        margin-top: 50px;
+        font-family: 'Courier New';
+        margin-left: 20%
+    }
+    input{
+        border-radius: 5px;
+        background-color:transparent;
+        width: 20%;
+        padding: 5px;
+        margin-top: 10px;
+    }
+</style>
+    <h1>Available Resources</h1>
+    {% if messages %}
+        {% for message in messages%}
+
+            <div class="alert alert-{{message.tags}}">
+                {{ message }}
+            </div>
+    {% endfor %}
+    {% endif %}
+
+    {% for resource in resources %}
+
+        <ul>
+            <li><a href="#">{{resource.res_title}}</a></li>
+        </ul>
+
+    {%endfor%}
+
+
+    <form method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input style=" width: 10%; background-color: rgba(0, 51, 128, 0.782); margin-left: 10%;" type="submit" value="Borrow">
+    </form>
+
+{% endblock %}
