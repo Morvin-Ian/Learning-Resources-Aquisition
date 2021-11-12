@@ -1,0 +1,28 @@
+p{
+      
+    font-size: large;
+    font-weight:bolder ;
+    margin-top: 50px;
+    font-family: 'Courier New';
+    margin-left: 20%
+}
+input{
+    border-radius: 5px;
+    background-color:transparent;
+    margin-left: 1%;
+    width: 40%;
+    margin-top: 30px;
+    padding: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+h1{
+    text-align: center;
+    background-color: #34495e;
+    padding: 20px;
+    color: white;
+}
+
+.form_style{
+    width: 70%;
+    margin-left: 35%;
+}

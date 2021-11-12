@@ -1,0 +1,23 @@
+
+    h1{
+        text-align: center;
+        background-color: #57626d;
+        padding: 20px;
+        color: white;
+    }
+    .borrow{
+        background-color: #364c61af;
+        padding: 30px;
+        border-radius: 5px;
+        width: 50%;
+    }
+    body{
+        background-color:rgba(222, 207, 179, 0.735);
+    }
+    .side{
+        float: right;
+        margin-right: 5%;
+        background-color: whitesmoke;
+        padding: 30px;
+        width: 40%;
+    }

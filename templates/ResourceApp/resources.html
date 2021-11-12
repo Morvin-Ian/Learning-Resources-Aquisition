@@ -1,27 +1,14 @@
 
 {% extends 'base.html'%}
-<title>Resources Page</title>
+{% load static %}
+{% load crispy_forms_tags%}
+
 
 {% block content %}
-{% load crispy_forms_tags %}
-<style>
-    p{
-      
-        font-size: large;
-        font-weight:bolder ;
-        margin-top: 50px;
-        font-family: 'Courier New';
-        margin-left: 20%
-    }
-    input{
-        border-radius: 5px;
-        background-color:transparent;
-        width: 20%;
-        padding: 5px;
-        margin-top: 10px;
-    }
-</style>
-    <h1>Available Resources</h1>
+<link rel="stylesheet" href="{% static 'ResourceApp/resources.css'%}">
+<title>Resources Page</title>
+
+    <h1>Materials/Books Access</h1>
     {% if messages %}
         {% for message in messages%}
 
@@ -31,19 +18,30 @@
     {% endfor %}
     {% endif %}
 
-    {% for resource in resources %}
+  <div class="content">
+    <div class="left">
+        <h1>Available Books</h1>
+        {% for resource in resources %}
+    
+            <ul>
+                <li><a href="#"> &gt; {{resource.res_title}}</a></li>
+            </ul>
+    
+        {%endfor%}
+      </div>
+      
+    <div class="right">
 
-        <ul>
-            <li><a href="#">{{resource.res_title}}</a></li>
-        </ul>
-
-    {%endfor%}
-
-
-    <form method="POST">
-        {% csrf_token %}
-        {{form|crispy}}
-        <input style=" width: 10%; background-color: rgba(0, 51, 128, 0.782); margin-left: 10%;" type="submit" value="Borrow">
-    </form>
+        <h1>Borrow Books</h1>
+    
+        <form method="POST">
+            {% csrf_token %}
+            <div style="margin:30px;" class="form_style">
+                {{form|crispy}}
+            </div>
+            <button style="margin: 30px 30px 0px 30px;" class="btn btn-outline-dark mt-3" type="submit" name="update" >Borrow</button>
+        </form>
+    </div>
+  </div>
 
 {% endblock %}

@@ -30,14 +30,14 @@ def updatephone(request,id):
                 phone_user.transactiondetails_set.create(user=phone_user, phone=phone, amount=sent_amount)
                 return redirect('home-page')
             else:
-                messages.info(request, f"the phone number {phone} not a valid kenyan number/has a wrong format")
+                messages.info(request, f"Phone Number {phone} not a valid kenyan number/has a wrong format")
 
         else:
             if len(phone) == 12 and phone.startswith("2547"):
                 phone_user.transactiondetails_set.create(user=phone_user, phone=phone, amount=1)
                 return redirect('home-page')
             else:
-                messages.info(request, f"the phone number {phone} not a valid kenyan number/has a wrong format")
+                messages.info(request, f"Phone Number {phone} not a valid kenyan number/has a wrong format")
 
     return render(request, 'DarajaApp/phone.html',{"phone_user":phone_user})
 
@@ -69,7 +69,7 @@ class MpesaApiView(APIView):
             "PartyA":sent_number,    
             "PartyB":bs_shortcode,    
             "PhoneNumber":sent_number,    
-            "CallBackURL":"https://essaybees.com/home",    
+            "CallBackURL":"https://rulibrary.herokuapp.com",    
             "AccountReference":"Rongo University",    
             "TransactionDesc":"Pay library penalties"
         }

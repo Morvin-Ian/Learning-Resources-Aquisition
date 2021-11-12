@@ -1,10 +1,15 @@
 <title>Borrowed Resources</title>
 
 {% extends 'base.html' %}
+{% load static%}
 {% block content %}
+<link rel="stylesheet" href="{% static 'ResourceApp/borrowed.css'%}">
+<h1 style="  background-color: #34495e;">Borrowed Resources</h1>
 
-<h1>Borrowed Resources</h1>
-{% if messages %}
+<body>
+    <script src="https://kit.fontawesome.com/ff17244aa6.js" crossorigin="anonymous"></script>
+    
+    {% if messages %}
     {% for message in messages%}
 
         <div class="alert alert-{{message.tags}}">
@@ -13,18 +18,34 @@
     {% endfor %}
 {% endif %}
 
-{% for resource in borrower.borrowed_resource_set.all %}
+<div class="side">
+    <ul>
+        <li>Home</li> <hr>
+        <li>About Us</li> <hr>
+        <li>Contact</li>
+    </ul>
+</div>
+<div class="borrow">
+    {% for resource in borrower.borrowed_resource_set.all %}
 
     <ul>
-        <li><a href="#">{{resource.borrowed}} </a></li>
+        <h2>{{resource.borrowed}}</h2>
         <li>Date Borrowed: {{resource.recorded_borrowing_date }} </li>
-        <li>Date to be Returned: {{resource.recorded_returning_date }} </li>
-        
+        <li>Return Date: {{resource.recorded_returning_date }} </li> <br>
+
+        <h5>Ratings</h5>
+
+        <i class="fas fa-star"></i><i class="fas fa-star"></i> <i class="fas fa-star"></i>
+      
+               
     </ul>
+    <hr>
+    <hr>
 
 {%endfor%}
 
 
 
 {% endblock %}
+</body>
 

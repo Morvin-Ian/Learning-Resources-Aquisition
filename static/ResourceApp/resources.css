@@ -1,0 +1,45 @@
+h1{
+    text-align: center;
+    background-color: #34495e;
+    padding: 20px;
+    color: white;
+}
+
+input{
+    border-radius: 5px;
+
+}
+.content{
+    display: flex;
+}
+
+
+a{
+    text-decoration: none;
+    color: whitesmoke;
+}
+.right{
+    border-radius: 5px;
+    background-color: rgb(215, 203, 195);
+    flex-basis: 60%;
+    padding: 30px;
+    margin-left: 2%;
+
+}
+.left{
+
+    border-radius: 5px;
+    background-color: #34495e;
+    flex-basis: 40%;
+    padding: 30px;
+   
+
+}
+.left ul li {
+    list-style: none;
+   
+}
+
+.left ul li a:hover{
+    font-size: large;
+}
