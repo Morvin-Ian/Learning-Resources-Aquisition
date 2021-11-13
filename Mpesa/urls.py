@@ -10,6 +10,7 @@ urlpatterns = [
     path('logout/', auth_view.LogoutView.as_view(template_name='UserApp/login.html') , name='logout'),
     path('',include('UserApp.urls')),
     path('phone/',include('DarajaApp.urls')),
+    path('api/',include('DarajaApp.Api.urls')),
     path('resource/',include('ResourceApp.urls')),
 ]
 
