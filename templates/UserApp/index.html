@@ -27,11 +27,10 @@
             </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul>
-                <li style="margin-left: 200px;"><a href="#"><i class="far fa-bell"></i> Notifications</a></li>
+                <li><a href="#"><i class="far fa-bell"></i> Notifications</a></li>
                 <li><a href="https://www.youtube.com" target="_blank"><i class="far fa-play-circle"></i> Videos</a></li>
                 <li><a href="#"><i class="far fa-heart"></i> Favourites</a></li>
-                <li style="color: white;"><a href="#"></a>{{user.username}}</li>
-
+                <li><a style="color: white;" href="{% url 'logout' %}">Logout</a></li>
         
              </ul>
         
@@ -45,7 +44,6 @@
                 <li><a href="#">Patners</a></li>
                 <li><a href="#">Contacts</a></li>
                 <li><a href="#">About</a></li>
-                <li><a href="{% url 'logout'%}">Logout</a></li>
 
             <div>
                <h3 style="color: white; padding-top: 30px;">Frequently Accessed</h3>
@@ -110,14 +108,14 @@
            
             <div>
                 <h3 style="color: white; padding-top: 30px;">Library Blogs</h3>
-                <p style="color: wheat;">Messi's First International Trophy</p>
-                <img style="border-radius: 10px;" src="{% static 'UserApp/Images/lapmessi.jpg'%}" alt="" width=250px height="150px">
+                <p style="color: wheat;">Top 10 trending Carsy</p>
+                <img style="border-radius: 10px;" src="{% static 'UserApp/Images/Tesla.jpg'%}" alt="" width=250px height="150px">
             </div>
 
             <div>
                 
-                <p style="color: wheat; padding-top: 10px;">Football Fans meet Messi</p>
-                <img style="border-radius: 10px;" src="{% static 'UserApp/Images/Jersey.jpg'%}" alt="" width=250px height="150px">
+                <p style="color: wheat; padding-top: 10px;">Creativity in Photography</p>
+                <img style="border-radius: 10px;" src="{% static 'UserApp/Images/creative.jpg'%}" alt="" width=250px height="150px">
             </div>
 
             </div>

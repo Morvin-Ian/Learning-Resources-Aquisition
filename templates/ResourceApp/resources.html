@@ -8,6 +8,45 @@
 <link rel="stylesheet" href="{% static 'ResourceApp/resources.css'%}">
 <title>Resources Page</title>
 
+<style>
+    @media (max-width:500px){
+        .left{
+        border-radius: 5px;
+        background-color: #34495e;
+        flex-basis: 50%;
+        padding: 30px;
+        margin-left: 10px;
+
+        }
+        .right{
+        border-radius: 5px;
+        flex-basis: 80%;
+        padding: 30px;
+        margin-left: 40px;
+    
+    }
+    }
+
+    @media (max-width:1000px){
+    .left{
+        border-radius: 5px;
+        background-color: #34495e;
+        flex-basis: 50%;
+        padding: 30px;
+        margin-left: 10px;
+
+        }
+    .right{
+        border-radius: 5px;
+        background-color: rgb(215, 203, 195);
+        flex-basis: 80%;
+        padding: 30px;
+        margin-left: 40px;
+    
+    }
+    }
+</style>
+
     <h1>Materials/Books Access</h1>
     {% if messages %}
         {% for message in messages%}

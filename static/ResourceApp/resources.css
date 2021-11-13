@@ -28,18 +28,61 @@ a{
 }
 .left{
 
-    border-radius: 5px;
-    background-color: #34495e;
-    flex-basis: 40%;
-    padding: 30px;
-   
+    display: none;
 
 }
-.left ul li {
-    list-style: none;
-   
-}
 
-.left ul li a:hover{
-    font-size: large;
+
+@media (max-width:500px){
+
+    h1{
+        text-align: center;
+        background-color: #34495e;
+        font-size: large;
+        padding: 10px;
+        color: white;
+    }
+    
+    input{
+        border-radius: 5px;
+    
+    }
+    .content{
+        display: flex;
+    }
+    
+    
+    a{
+        text-decoration: none;
+        color: whitesmoke;
+    }
+    .right{
+        border-radius: 5px;
+        background-color: rgb(215, 203, 195);
+        flex-basis: 50%;
+        padding: 30px;
+        margin-left: 2%;
+    
+    }
+    .left{
+    
+        border-radius: 5px;
+        background-color: #34495e;
+        flex-basis: 50%;
+        padding: 30px;
+        margin-left: 10px;
+
+    
+    }
+    .left ul li {
+        list-style: none;
+        font-size: small;
+       
+    }
+  
+    
+    
+  
+
+    
 }

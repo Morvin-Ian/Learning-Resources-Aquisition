@@ -20,7 +20,7 @@ def resource(request,id):
             book_title = form.cleaned_data.get('borrowed')
             expiry_date = form.cleaned_data.get('recorded_returning_date')
             if borrower.borrowed_resource_set.filter(borrowed=book_title).exists():
-                messages.info(request,f"The Book {book_title} already Borrowed")
+                messages.info(request,f"The Book '{book_title}' already Borrowed")
             else:
                 borrower.borrowed_resource_set.create(borrowed=book_title,recorded_returning_date=expiry_date)
                 
@@ -45,7 +45,6 @@ def borrowed(request,id):
                         monthly_charge = (int(current.strftime("%m")) - int(expiry_date.strftime("%m")))*30*2
                         daily_charge = (int(current.strftime("%d")) - int(expiry_date.strftime("%d")))*2
                         total_charges = yearly_charge+monthly_charge+daily_charge
-                        print(total_charges)
                         if total_charges >1:
                             borrower.transactiondetails_set.update(user=borrower,amount=total_charges)
 
@@ -57,7 +56,6 @@ def borrowed(request,id):
                     monthly_charge = (int(current.strftime("%m")) - int(expiry_date.strftime("%m")))*30*2
                     daily_charge = (int(current.strftime("%d")) - int(expiry_date.strftime("%d")))*2
                     total_charges = monthly_charge+daily_charge
-                    print(total_charges)
                     if total_charges >1:
                         borrower.transactiondetails_set.update(user=borrower,amount=total_charges)
 

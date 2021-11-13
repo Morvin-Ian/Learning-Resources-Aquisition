@@ -5,8 +5,12 @@ from django.contrib.auth.models import User
 from .forms import UserRegistrationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from ResourceApp.models import Borrowed_Resource
 from django.contrib.auth.models import User
+
+
+from ResourceApp.models import Borrowed_Resource
+
+
 
 
 @login_required

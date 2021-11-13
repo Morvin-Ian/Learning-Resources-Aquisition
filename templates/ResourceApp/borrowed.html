@@ -7,7 +7,64 @@
 <h1 style="  background-color: #34495e;">Borrowed Resources</h1>
 
 <body>
-    <script src="https://kit.fontawesome.com/ff17244aa6.js" crossorigin="anonymous"></script>
+
+<style>
+
+
+@media (max-width:500px){
+
+h1{
+    text-align: center;
+    background-color: #57626d;
+    padding: 20px;
+    color: white;
+  
+}
+.borrow{
+    font-size: smaller;
+    background-color: #364c61af;
+    padding: 30px;
+    border-radius: 5px;
+    width: 90%;
+    margin-left: 20px;
+}
+body{
+    background-color:rgba(222, 207, 179, 0.735);
+}
+.side{
+   display: none;
+}
+}
+
+@media (max-width:1000px){
+
+h1{
+    text-align: center;
+    background-color: #57626d;
+    padding: 20px;
+    color: white;
+  
+}
+.borrow{
+    font-size: smaller;
+    background-color: #364c61af;
+    padding: 30px;
+    border-radius: 5px;
+    width: 90%;
+    margin-left: 20px;
+}
+body{
+    background-color:rgba(222, 207, 179, 0.735);
+}
+.side{
+   display: none;
+}
+}
+
+    </style>
+
+
+<script src="https://kit.fontawesome.com/ff17244aa6.js" crossorigin="anonymous"></script>
     
     {% if messages %}
     {% for message in messages%}
@@ -28,19 +85,24 @@
 <div class="borrow">
     {% for resource in borrower.borrowed_resource_set.all %}
 
-    <ul>
-        <h2>{{resource.borrowed}}</h2>
-        <li>Date Borrowed: {{resource.recorded_borrowing_date }} </li>
-        <li>Return Date: {{resource.recorded_returning_date }} </li> <br>
+       {% if resource.recorded_returning_date < resource.recorded_borrowing_date %}
 
-        <h5>Ratings</h5>
-
-        <i class="fas fa-star"></i><i class="fas fa-star"></i> <i class="fas fa-star"></i>
-      
-               
-    </ul>
-    <hr>
-    <hr>
+            <ul>
+                <h2>{{resource.borrowed}} </h2>  
+                <li>Return Date: {{resource.recorded_returning_date }} </li> <br>
+                <h4 style="color: red;">Late</h4>
+            </ul>
+            <hr>
+        {% else %}
+            <ul>
+                <h2>{{resource.borrowed}}</h2>
+                <li>Date Borrowed: {{resource.recorded_borrowing_date }} </li>
+                <li>Return Date: {{resource.recorded_returning_date }} </li> <br>
+                <h5>Ratings</h5>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i> <i class="fas fa-star"></i>
+            </ul>
+            <hr>
+        {% endif %}
 
 {%endfor%}
 
