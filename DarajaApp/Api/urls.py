@@ -5,7 +5,8 @@ from DarajaApp.Api.views import LnmApiGenericView
 
 
 urlpatterns = [
+    path('phone/',LnmApiGenericView.as_view(), name='generics'),
     path('phone/', updatephone,name='updatephone'),
-    path('phone/lnm/',LnmApiGenericView.as_view(), name='generics'),
+    
   
 ]

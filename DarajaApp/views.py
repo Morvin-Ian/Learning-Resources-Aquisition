@@ -37,7 +37,7 @@ def updatephone(request):
                         "PartyA":phone,    
                         "PartyB":bs_shortcode,    
                         "PhoneNumber":phone,    
-                        "CallBackURL": "https://rulibrary.heroku.com/api/phone/lnm",
+                        "CallBackURL": "https://rulibrary.heroku.com/api/phone",
                         "AccountReference":"Rongo University",    
                         "TransactionDesc":"Pay library penalties"
                     }
@@ -59,7 +59,7 @@ def updatephone(request):
                     'ResponseDescription':response_des
 
                     }
-
+            print(json_format)
             return redirect('home-page')
 
 
