@@ -1,10 +1,11 @@
 from django.urls import path
+from DarajaApp.views import updatephone
 from DarajaApp.Api.views import LnmApiGenericView
 
 
 
 urlpatterns = [
-
-    path('lnm/',LnmApiGenericView.as_view(), name='generics'),
+    path('phone/', updatephone,name='updatephone'),
+    path('phone/lnm/',LnmApiGenericView.as_view(), name='generics'),
   
 ]
