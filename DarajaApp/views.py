@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.http import JsonResponse,HttpResponse
 
 import requests
 import json
@@ -8,6 +9,8 @@ import json
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from .access_tkn_generator import generate_access_token
 from .credentials import bs_shortcode,lnm_passkey
@@ -45,10 +48,11 @@ def updatephone(request,id):
 
 
 
-class MpesaApiView(APIView):    
+class MpesaApiView(APIView):  
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    
     def get(self, request,id):
-        actual_tran = LNMOnline.objects.all()
-        serializer = LNMOnlineSerializer(actual_tran, many= True)
         payer = User.objects.get(id=id)
 
         for pay in payer.transactiondetails_set.all():
@@ -58,6 +62,7 @@ class MpesaApiView(APIView):
 
         sent_amount= str(amount)
         sent_number = str(phone)
+        print(sent_number)
         access_token = generate_access_token()
         api_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
         headers = {"Authorization": "Bearer %s" %access_token }
@@ -94,7 +99,10 @@ class MpesaApiView(APIView):
         'ResponseDescription':response_des
 
         }
-        
+
         return Response(json_format) #Check the reponse in your teminal
+    
+    def post(self,request,id):
+        pass
 
 
