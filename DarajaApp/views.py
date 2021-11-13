@@ -63,7 +63,6 @@ class MpesaApiView(APIView):
         sent_amount= str(amount)
         sent_number = str(phone)
         callback = f"https://rulibrary.herokuapp.com/api/lnm/{id}"
-        print(callback)
         access_token = generate_access_token()
         api_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
         headers = {"Authorization": "Bearer %s" %access_token }
