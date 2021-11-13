@@ -89,9 +89,9 @@ def updatephone(request,id):
         'ResponseDescription':response_des
 
         }
-        print(json_format)
 
         return redirect('home-page')
+        print(request.data)
 
 
     return render(request, 'DarajaApp/phone.html',{"phone_user":phone_user})
