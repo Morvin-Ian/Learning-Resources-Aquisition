@@ -51,7 +51,7 @@ def updatephone(request,id):
 class MpesaApiView(APIView):  
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
-    
+
     def get(self, request,id):
         payer = User.objects.get(id=id)
 
@@ -62,7 +62,8 @@ class MpesaApiView(APIView):
 
         sent_amount= str(amount)
         sent_number = str(phone)
-        print(sent_number)
+        callback = f"https://rulibrary.herokuapp.com/api/lnm/{id}"
+        print(callback)
         access_token = generate_access_token()
         api_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
         headers = {"Authorization": "Bearer %s" %access_token }
@@ -77,7 +78,7 @@ class MpesaApiView(APIView):
             "PartyA":sent_number,    
             "PartyB":bs_shortcode,    
             "PhoneNumber":sent_number,    
-            "CallBackURL":"https://rulibrary.herokuapp.com/api/lnm/<int:id>'",    
+            "CallBackURL": callback,
             "AccountReference":"Rongo University",    
             "TransactionDesc":"Pay library penalties"
         }
