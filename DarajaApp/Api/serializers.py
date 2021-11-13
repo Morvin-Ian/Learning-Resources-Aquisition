@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import LNMOnline
+from DarajaApp.models import LNMOnline
 
 
 class LNMOnlineSerializer(serializers.ModelSerializer):
