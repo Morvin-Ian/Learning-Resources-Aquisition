@@ -27,7 +27,7 @@ def updatephone(request,id):
             sent_amount = str(latest_amount)
             
             if len(phone) == 12 and phone.startswith("2547"):
-                phone_user.transactiondetails_set.update(user=phone_user, phone=phone, amount=sent_amount)
+                phone_user.transactiondetails_set.create(user=phone_user, phone=phone, amount=sent_amount)
                 return redirect('home-page')
             else:
                 messages.info(request, f"Phone Number '{phone}' not a valid kenyan number/has a wrong format")
@@ -69,7 +69,7 @@ class MpesaApiView(APIView):
             "PartyA":sent_number,    
             "PartyB":bs_shortcode,    
             "PhoneNumber":sent_number,    
-            "CallBackURL":"https://rulibrary.herokuapp.com",    
+            "CallBackURL":"https://rulibrary.herokuapp.com/api/lnm/<int:id>'",    
             "AccountReference":"Rongo University",    
             "TransactionDesc":"Pay library penalties"
         }
