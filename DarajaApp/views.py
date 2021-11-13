@@ -15,6 +15,7 @@ from .timestamp import format_time
 from  .password_generator import decode_password
 
 from .models import TransactionDetails
+from .serializers import LNMOnlineSerializer
 
 
 def updatephone(request,id):
@@ -45,6 +46,8 @@ def updatephone(request,id):
 
 class MpesaApiView(APIView):    
     def get(self, request,id):
+        actual_tran = LNMOnline.objects.all()
+        serializer = LNMOnlineSerializer(actual_tran, many= True)
         payer = User.objects.get(id=id)
 
         for pay in payer.transactiondetails_set.all():
@@ -54,7 +57,6 @@ class MpesaApiView(APIView):
 
         sent_amount= str(amount)
         sent_number = str(phone)
-        print(sent_amount)
         access_token = generate_access_token()
         api_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
         headers = {"Authorization": "Bearer %s" %access_token }

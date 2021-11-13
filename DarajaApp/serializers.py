@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Transaction
+from .models import LNMOnline
 
 
-class MpesaSerializer(serializers.ModelSerializer):
+class LNMOnlineSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Transaction
-        fields = ['name' , 'amount']
+        model = LNMOnline
+        fields = ['id']
