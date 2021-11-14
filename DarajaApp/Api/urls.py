@@ -7,7 +7,7 @@ from DarajaApp.views import updatephone
 urlpatterns = [
 
     path('lnm/',LnmApiGenericView.as_view(), name='generics'),
-    path('phone/',LnmApiGenericView.as_view(), name='phone'),
+    path('phone/',updatephone, name='phone'),
     
   
 ]
