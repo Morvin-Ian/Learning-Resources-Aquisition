@@ -16,8 +16,6 @@ class LnmApiGenericView(CreateAPIView):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
 
-  
-
     def create(self,request):
         print(request.data,"Successfull Morvin")
 
