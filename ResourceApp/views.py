@@ -45,35 +45,38 @@ def borrowed(request,id):
                         monthly_charge = (int(current.strftime("%m")) - int(expiry_date.strftime("%m")))*30*2
                         daily_charge = (int(current.strftime("%d")) - int(expiry_date.strftime("%d")))*2
                         total_charges = yearly_charge+monthly_charge+daily_charge
-                        if total_charges >1:
-                            borrower.transactiondetails_set.update(user=borrower,amount=total_charges)
-
+                        
         
-                        messages.info(request,f"{borrower.username} is expected to pay Ksh {total_charges} due to by_passing Expiry dates ")
+                        messages.info(request,f"{borrower.username} to pay Ksh {total_charges}-[ Date Expired ] ")
 
                 # A month late
                 elif int(expiry_date.strftime("%m")) != int(current.strftime("%m")):
                     monthly_charge = (int(current.strftime("%m")) - int(expiry_date.strftime("%m")))*30*2
                     daily_charge = (int(current.strftime("%d")) - int(expiry_date.strftime("%d")))*2
                     total_charges = monthly_charge+daily_charge
-                    if total_charges >1:
-                        borrower.transactiondetails_set.update(user=borrower,amount=total_charges)
-
+                 
         
-                    messages.info(request,f"{borrower.username} is expected to pay Ksh {total_charges} due to by_passing Expiry dates ")
+                    messages.info(request,f"{borrower.username} to pay Ksh {total_charges}- [ Date Expired ] ")
 
+                
+                # Days late
+                elif int(expiry_date.strftime("%d")) != int(current.strftime("%d")):
+                    daily_charge = (int(current.strftime("%d")) - int(expiry_date.strftime("%d")))*2
+                    total_charges = daily_charge
+                    messages.info(request,f"{borrower.username} to pay Ksh {total_charges}  -[ Date Expired ] ")
 
-                # Not expired
-                else:
-                    pass
+       
+                if total_charges >1:
+                        borrower.transactiondetails_set.create(user=borrower,amount=total_charges)     
                     
             # Not expired    
             else:
                 pass
-        
-          
-        
+        total_charges += total_charges
+        print(total_charges)
 
+    else:
+        borrower.transactiondetails_set.update(user=borrower,amount=1)    
 
     return render(request,'ResourceApp/borrowed.html',{"borrower":borrower})
 

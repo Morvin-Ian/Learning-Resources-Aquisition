@@ -66,7 +66,7 @@ body{
 
 <script src="https://kit.fontawesome.com/ff17244aa6.js" crossorigin="anonymous"></script>
     
-    {% if messages %}
+{% if messages %}
     {% for message in messages%}
 
         <div class="alert alert-{{message.tags}}">
@@ -83,6 +83,7 @@ body{
     </ul>
 </div>
 <div class="borrow">
+{% if borrower.borrowed_resource_set.all%}
     {% for resource in borrower.borrowed_resource_set.all %}
 
        {% if resource.recorded_returning_date < resource.recorded_borrowing_date %}
@@ -104,7 +105,10 @@ body{
             <hr>
         {% endif %}
 
-{%endfor%}
+        {%endfor%}
+{% else %}
+<p>No Resources Borrowed Yet</p>
+{% endif%}
 
 
 
