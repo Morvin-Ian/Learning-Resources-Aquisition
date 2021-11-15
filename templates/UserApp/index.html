@@ -80,11 +80,9 @@
              <a style="color: rgb(77, 71, 71);" href="{% url 'borrowed_materials' user.id %}">
                 <h5>Borrowed Materials</h5>
                 <p> <b>{{user.username}}</b> Acquired the following Resources: <br>
-                 <ul>
-                     <li>Django for beginers</li>
-                     <li>Python programming Advanced</li>
-                     <li>AI nad ML</li>
-                 </ul> 
+               
+                   <a href="{% url 'borrowed_materials' user.id %}">...</a>
+            
              </a>
 
             </div>
