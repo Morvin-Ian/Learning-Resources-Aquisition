@@ -32,7 +32,7 @@ def resource(request,id):
 
 def borrowed(request,id):
     borrower = User.objects.get(id=id)
-    if borrower.borrowed_resource_set.all().exists():
+    if borrower.borrowed_resource_set.all():
         for resource in borrower.borrowed_resource_set.all():
             expiry_date = resource.recorded_returning_date
             current=datetime.datetime.now()
@@ -69,14 +69,9 @@ def borrowed(request,id):
                 if total_charges >1:
                         borrower.transactiondetails_set.create(user=borrower,amount=total_charges)     
                     
-            # Not expired    
-            else:
-                pass
-        total_charges += total_charges
-        print(total_charges)
-
     else:
-        borrower.transactiondetails_set.update(user=borrower,amount=1)    
+        pass
+    
 
     return render(request,'ResourceApp/borrowed.html',{"borrower":borrower})
 
