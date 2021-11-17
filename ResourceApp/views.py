@@ -23,6 +23,7 @@ def resource(request,id):
                 messages.info(request,f"The Book '{book_title}' already Borrowed")
             else:
                 borrower.borrowed_resource_set.create(borrowed=book_title,recorded_returning_date=expiry_date)
+                return redirect('home-page')
                 
     else:
         form = ResourceForm()
