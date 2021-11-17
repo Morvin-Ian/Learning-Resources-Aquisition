@@ -13,13 +13,18 @@ import datetime
 def resource(request,id):
     resources = Resource.objects.all()
     form = ResourceForm()
+    current=datetime.datetime.now()
+    
+
     borrower = User.objects.get(id=id)
     if request.method == 'POST':
         form = ResourceForm(request.POST)
         if form.is_valid():
             book_title = form.cleaned_data.get('borrowed')
             expiry_date = form.cleaned_data.get('recorded_returning_date')
-            if borrower.borrowed_resource_set.filter(borrowed=book_title).exists():
+            if int(current.strftime("%Y%m%d")) >= int(expiry_date.strftime("%Y%m%d")):
+               messages.info(request,f"Invalid Borrowing Date")
+            elif borrower.borrowed_resource_set.filter(borrowed=book_title).exists():
                 messages.info(request,f"The Book '{book_title}' already Borrowed")
             else:
                 borrower.borrowed_resource_set.create(borrowed=book_title,recorded_returning_date=expiry_date)
