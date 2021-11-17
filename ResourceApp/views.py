@@ -23,7 +23,7 @@ def resource(request,id):
             book_title = form.cleaned_data.get('borrowed')
             expiry_date = form.cleaned_data.get('recorded_returning_date')
             if int(current.strftime("%Y%m%d")) >= int(expiry_date.strftime("%Y%m%d")):
-               messages.info(request,f"Invalid Borrowing Date")
+               messages.info(request,f"Invalid Due Date")
             elif borrower.borrowed_resource_set.filter(borrowed=book_title).exists():
                 messages.info(request,f"The Book '{book_title}' already Borrowed")
             else:
