@@ -1,12 +1,12 @@
 from django.urls import path
-from .views import LnmApiGenericView
+from .views import LNM
 from . import views
 
 
 
 urlpatterns = [
 
-    path('lnm/',LnmApiGenericView.as_view(), name='generics'),
+    path('lnm/',LNM.as_view(), name='lnm'),
     path('phone/<int:id>', views.updatephone, name='phone')
   
   

@@ -15,6 +15,7 @@ from  .password_generator import decode_password
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
+from rest_framework.views import APIView
 
 from .models import TransactionDetails
 from .models import LNMOnline
@@ -23,6 +24,58 @@ from .serializers import LNMOnlineSerializer
 
 
 
+
+
+class LNM(APIView):
+    def mpesa_payments(self, amount: str, phone: str) -> dict:
+        access_token = generate_access_token()
+        api_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
+        headers = {"Authorization": "Bearer %s" %access_token }
+        request = {    
+                    "BusinessShortCode":bs_shortcode,    
+                    "Password":decode_password(),    
+                    "Timestamp":format_time(),    
+                    "TransactionType": "CustomerPayBillOnline",    
+                    "Amount":amount,    
+                    "PartyA":phone,    
+                    "PartyB":bs_shortcode,    
+                    "PhoneNumber":phone,  
+                    "CallBackURL": "https://rulibrary.herokuapp.com/api/lnm",
+                    "AccountReference":"Rongo University",    
+                    "TransactionDesc":"Pay library penalties"
+                }
+        response = requests.post(api_url, json=request, headers=headers) #The response can either be a succesful transaction or a failed transaction 
+        response_string =response.text
+        res = json.loads(response_string)
+
+        res_code = res['ResponseCode']
+        if(res_code == '0'):
+            merchant_id = res['MerchantRequestID']
+            checkout_id = res['CheckoutRequestID']
+            code = res['ResponseCode']
+            response_des = res['ResponseDescription']
+            json_format = {
+                    'MerchantRequestId': merchant_id,
+                    'CheckoutRequestId': checkout_id,
+                    'ResponseCode':code, 
+                    'ResponseDescription':response_des
+                    }
+
+            transaction= MpesaCallBack.objects.create(
+                merchant_request_id = merchant_request_id,
+                checkout_request_id = checkout_request_id,
+                response_code = response_code,
+                response_description = response_description,
+            )
+
+            transaction.save()  
+            return json_format
+    
+    def post(self, request, *args, **kwargs):
+        payment_res = self.mpesa_payments(amount="1", phone="245726486929")
+        return  HttpResponse("Done")
+
+    
 
 def updatephone(request,id):
     phone_user = User.objects.get(id=id)
