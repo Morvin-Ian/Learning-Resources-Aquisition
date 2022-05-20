@@ -10,9 +10,7 @@ class MpesaCallBack(models.Model):
     customer_message = models.CharField(max_length=50)
 
     def __str__(self):
-        return f'{self.merchant_request_id} - {self.customer_message}'
+        return f'{self.merchant_request_id}'
     class Meta:
-        db_table = ''
-        managed = True
         verbose_name = 'MpesaCallBack'
-        verbose_name_plural = 'MpesaCallBacks'
+    

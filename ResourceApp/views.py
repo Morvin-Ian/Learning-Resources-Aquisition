@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 
 from .models import Resource,Borrowed_Resource
-from DarajaApp.models import TransactionDetails
 from .forms import ResourceForm
 
 

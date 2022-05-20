@@ -17,17 +17,14 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 
-from .models import TransactionDetails
-from .models import LNMOnline
-from .serializers import LNMOnlineSerializer
-
+from .models import MpesaCallBack
 
 
 
 
 
 class LNM(APIView):
-    def mpesa_payments(self, amount: str, phone: str) -> dict:
+    def mpesa_payments(self, request):
         access_token = generate_access_token()
         api_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
         headers = {"Authorization": "Bearer %s" %access_token }
@@ -36,10 +33,10 @@ class LNM(APIView):
                     "Password":decode_password(),    
                     "Timestamp":format_time(),    
                     "TransactionType": "CustomerPayBillOnline",    
-                    "Amount":amount,    
-                    "PartyA":phone,    
+                    "Amount":"1",    
+                    "PartyA":"254726486929",    
                     "PartyB":bs_shortcode,    
-                    "PhoneNumber":phone,  
+                    "PhoneNumber":"254726486929",  
                     "CallBackURL": "https://rulibrary.herokuapp.com/api/lnm",
                     "AccountReference":"Rongo University",    
                     "TransactionDesc":"Pay library penalties"
@@ -62,18 +59,18 @@ class LNM(APIView):
                     }
 
             transaction= MpesaCallBack.objects.create(
-                merchant_request_id = merchant_request_id,
-                checkout_request_id = checkout_request_id,
-                response_code = response_code,
-                response_description = response_description,
+                merchant_request_id = merchant_id,
+                checkout_request_id = checkout_id,
+                response_code = res_code,
+                response_description = response_des,
             )
 
             transaction.save()  
             return json_format
     
     def post(self, request, *args, **kwargs):
-        payment_res = self.mpesa_payments(amount="1", phone="245726486929")
-        return  HttpResponse("Done")
+        payment_res = self.mpesa_payments(request)
+        return render(request, 'DarajaApp/phone.html')
 
     
 
@@ -127,16 +124,7 @@ def updatephone(request,id):
             messages.info(request, f"No charges for {phone_user.username} ")
     return render(request, 'DarajaApp/phone.html')
   
-class LnmApiGenericView(CreateAPIView):
-    queryset = LNMOnline.objects.all()
-   
-   
 
-    def create(self,request):
-        print(request.data,"Successfull Morvin")
-
-
-  
 
 
             # else:
